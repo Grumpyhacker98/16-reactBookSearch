@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import API from "../utils/API"
 import axios from "axios"
 
 class Search extends Component {
@@ -36,6 +37,13 @@ class Search extends Component {
             })
     }
 
+    save(e, book) {
+        e.preventDefault()
+        console.log(book)
+        
+        API.saveBook(book).then(res => console.log(res))
+    }
+
     render() {
         return (
             <div className="container-fluid">
@@ -54,7 +62,7 @@ class Search extends Component {
                     <div key={i} className="row p-4 border m-2">
                         <div className="col-4">
                             <img src={book.pic} />
-                            <a href={book.link}>More</a>
+                            <button onClick={e => this.save(e, book)}>Save</button>
                         </div>
                         <div className="col-8">
                             <h4>{book.title}</h4>
